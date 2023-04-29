@@ -4,6 +4,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import { connectDb } from './src/dbConfig/connectDb.js'
 import UserRouter from './src/routers/UserRouter.js'
+import JobRouter from './src/routers/JobRouter.js'
 dotenv.config()
 
 
@@ -23,6 +24,7 @@ connectDb()
 //routers
 
 app.use("/api/v1/user", UserRouter)
+app.use("/api/v1/job", JobRouter)
 
 //global error handler
 

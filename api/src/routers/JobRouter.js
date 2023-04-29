@@ -3,6 +3,7 @@ import {
   deleteJob,
   findJobAndUpdate,
   getAllJObs,
+  getSingleJob,
   postJob,
 } from "../models/jobs/JobModel.js";
 
@@ -30,6 +31,21 @@ router.get("/", async (req, res, next) => {
   try {
     const result = await getAllJObs();
 
+    res.json({
+      status: "success",
+      message: "Job fetched ",
+      result,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+//get singleJob
+router.get("/:id", async (req, res, next) => {
+  try {
+    const result = await getSingleJob(req.params.id);
     res.json({
       status: "success",
       message: "Job fetched ",

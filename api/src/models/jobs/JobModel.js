@@ -10,6 +10,10 @@ export const getAllJObs = () => {
     return JobSchema.find()
 }
 
+export const getSingleJob = (id) => {
+    return JobSchema.findById(id)
+}
+
 //find by filter and update
 export const findJobAndUpdate = ( filter, obj) => {
     return JobSchema.findOneAndUpdate(filter, obj, {new: true})

@@ -54,6 +54,7 @@ router.post("/", async(req, res, next) => {
       //is password match
   
       if (result?._id) {
+        const {_id, fName, lName, email} = result
         const isPasswordMatch = comparePassword(password, result.password);
   
         if (isPasswordMatch) {
@@ -65,7 +66,12 @@ router.post("/", async(req, res, next) => {
           return res.json({
             status: "success",
             message: "Login Successful",
-            result,
+            result:{
+             _id,
+              fName,
+              lName,
+              email, 
+            },
           });
         }
       }

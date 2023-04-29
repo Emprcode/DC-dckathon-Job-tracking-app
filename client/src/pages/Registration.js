@@ -5,6 +5,7 @@ import CustomInput from "../components/customInput/CustomInput";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../utils/AxiosHelper";
+import { toast } from "react-toastify";
 
 const Registration = () => {
   const [form, setForm] = useState({});
@@ -59,7 +60,7 @@ const Registration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { status, message } = await createUser(form);
-    alert(status, message);
+    toast[status](message)
     console.log(form);
     navigation("/");
   };

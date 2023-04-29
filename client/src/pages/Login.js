@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Layout from "../components/layouts/Layout";
 import CustomInput from "../components/customInput/CustomInput";
 import { Button } from "react-bootstrap";
+import { UserLogin } from "./user/UserAction";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { loginUser } from "../utils/AxiosHelper";
 const Login = () => {
+  const [form, setForm] = useState({});
   const inputField = [
     {
       name: "email",
@@ -20,6 +25,25 @@ const Login = () => {
       placeholder: "****",
     },
   ];
+  const navigation = useNavigate();
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    const { status, message } = await loginUser(form);
+    toast[status](message)
+    console.log(form);
+   status === "success" && navigation("/dashboard");
+  };
+
   return (
     <div>
       <Layout>
@@ -29,9 +53,9 @@ const Login = () => {
             <h2 className="fw-bold text-center">Login</h2>
             <hr />
 
-            <Form className="mt-4  ">
+            <Form className="mt-4  " onSubmit={handleOnSubmit}>
               {inputField.map((item, i) => {
-                return <CustomInput key={i} {...item} />;
+                return <CustomInput key={i} {...item} onChange={handleOnChange}/>;
               })}
               <div className="d-grid mt-5">
                 <Button variant="info" type="submit">

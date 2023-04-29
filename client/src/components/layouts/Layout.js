@@ -6,9 +6,10 @@ const Layout = ({ children }) => {
     <div>
       <Header />
       <div className="childeren">{children}</div>
-      <footer className="bg-dark text-light text-center mt-3">
+      {/* <footer className="bg-dark text-light text-center mt-3">
         &copy; All right reserved 2023 || Team Archer
       </footer>
+    </div> */}
     </div>
   );
 };

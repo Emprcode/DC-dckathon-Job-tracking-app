@@ -13,11 +13,11 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto ">
-            <Link to="#home" className="nav-link">
-              Home
+            <Link to="/" className="nav-link">
+            <i className="fa-solid fa-user"></i>
             </Link>
-            <Link to="#link" className="nav-link">
-              Link
+            <Link to="/register" className="nav-link">
+            <i className="fa-solid fa-right-to-bracket"></i>
             </Link>
           </Nav>
         </Navbar.Collapse>

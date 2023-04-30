@@ -63,13 +63,13 @@ export const JobList = () => {
         <p className=""></p>
         <h1 className="text-center">Job List</h1>
         <Link to="/addjob" className="nav-link">
-          <Button>Add Job</Button>
+          <Button variant="info text-light">Add Job</Button>
         </Link>
       </div>
 
       <div className="tablecontainer">
         <div className="alltables d-flex gap-2 ">
-          <div className="wantToapply card1 rounded p-3">
+          <div className="wantToapply  rounded p-3">
             <h3 className="text-center">Want to apply </h3>
             <Table striped bordered hover className="table1">
               <thead>
@@ -103,7 +103,7 @@ export const JobList = () => {
             </Table>
           </div>
 
-          <div className="processing card2 rounded p-3">
+          <div className="wantToapply  rounded p-3">
             {" "}
             <h3 className="text-center">Pending jobs</h3>
             <Table striped bordered hover>
@@ -135,7 +135,7 @@ export const JobList = () => {
               </tbody>
             </Table>
           </div>
-          <div className="applied card3 rounded p-3">
+          <div className="wantToapply  rounded p-3">
             {" "}
             <h3 className="text-center">Applied Jobs</h3>
             <Table striped bordered hover>
@@ -167,7 +167,7 @@ export const JobList = () => {
               </tbody>
             </Table>
           </div>
-          <div className="rejected card4 rounded p-3">
+          <div className="wantToapply  rounded p-3">
             {" "}
             <h3 className="text-center">Rejected Jobs</h3>
             <Table striped bordered hover>

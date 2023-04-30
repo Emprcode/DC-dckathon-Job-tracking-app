@@ -8,7 +8,7 @@ const JobSchema = new mongoose.Schema(
     },
     company: {
       type: String,
-      required: true,
+      // required: true,
     },
     comment: {
       type: String,
@@ -16,7 +16,7 @@ const JobSchema = new mongoose.Schema(
     },
     link: {
       type: String,
-        required: true,
+      required: true,
     },
     appliedDate: {
       type: Date,

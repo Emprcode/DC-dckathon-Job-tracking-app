@@ -4,6 +4,8 @@ const rootUrl = "http://localhost:8000/api/v1";
 const userUrl = rootUrl + "/user";
 const loginUrl = rootUrl + "/user/login";
 const addJobUrl = rootUrl + "/job";
+const profileUrl = rootUrl + "/profile";
+const CommentsUrl = rootUrl + "/comment";
 
 const getUseridfromStorage = () => {
   const user = sessionStorage.getItem("loginId");

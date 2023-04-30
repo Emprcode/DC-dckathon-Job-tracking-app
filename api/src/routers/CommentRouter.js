@@ -1,15 +1,13 @@
 import express from "express";
-import { addComment, getComments,  } from "../models/comments/CommentModel.js";
+import { addComment, getComments } from "../models/comments/CommentModel.js";
 const router = express.Router();
 
-
 // /comments
-
 
 router.post("/", async (req, res, next) => {
   try {
     // const {comment} = req.body
-    
+
     const result = await addComment(req.body);
 
     result?._id
@@ -28,10 +26,10 @@ router.post("/", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    const {authorization} = req.headers
-    console.log(authorization)
-    const result = await getComments({idJob: authorization});
-console.log(result)
+    const { authorization } = req.headers;
+    console.log(authorization);
+    const result = await getComments({ idJob: authorization });
+    console.log(result);
     res.json({
       status: "success",
       message: "Job fetched ",
@@ -41,6 +39,5 @@ console.log(result)
     next(error);
   }
 });
-
 
 export default router;

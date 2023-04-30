@@ -18,7 +18,7 @@ const DashBoard = () => {
     callJobAxios();
   }, []);
 
-  const approvedList = allJob.filter((item) => item.status === "approved");
+  const approvedList = allJob.filter((item) => item.status === "applied");
   const pendingList = allJob.filter((item) => item.status === "pending");
   const rejectedList = allJob.filter((item) => item.status === "rejected");
   const wantToApplyList = allJob.filter(
@@ -65,7 +65,7 @@ const DashBoard = () => {
                   </p>
                 </div>
 
-                <h4 className="fw-bold">{wantToApplyList.length}</h4>
+                <h4 className="fw-bold">{approvedList.length}</h4>
                 <p className="p-3">Increased by 40%</p>
               </div>
             </Link>

@@ -20,7 +20,7 @@ export const MockProfile = () => {
   return (
     <Layout>
       <div className="container mt-5">
-        <Row className="profileTop">
+        <Row className="profileTop mb-5">
           <Col xs={6} md={4} className="firstcol">
             <img
               src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
@@ -53,11 +53,7 @@ export const MockProfile = () => {
                 <Card style={{ width: "18rem" }}>
                   <Card.Body>
                     <Card.Title>Job Applied</Card.Title>
-                    <Card.Text>
-                      Some quick example text to build on the card title and
-                      make up the bulk of the card's content.
-                    </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Card.Text>Stats of the job applied</Card.Text>
                   </Card.Body>
                 </Card>
               </div>
@@ -65,23 +61,7 @@ export const MockProfile = () => {
                 <Card style={{ width: "18rem" }}>
                   <Card.Body>
                     <Card.Title>Potential Job </Card.Title>
-                    <Card.Text>
-                      Some quick example text to build on the card title and
-                      make up the bulk of the card's content.
-                    </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div className="divcar3">
-                <Card style={{ width: "18rem" }}>
-                  <Card.Body>
-                    <Card.Title>Follow Up</Card.Title>
-                    <Card.Text>
-                      Some quick example text to build on the card title and
-                      make up the bulk of the card's content.
-                    </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Card.Text>Stats of the potential job</Card.Text>
                   </Card.Body>
                 </Card>
               </div>

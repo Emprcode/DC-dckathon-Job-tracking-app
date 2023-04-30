@@ -29,7 +29,6 @@ router.post("/", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    
     const result = await getAllJObs();
 
     res.json({
@@ -94,7 +93,5 @@ router.delete("/", async (req, res, next) => {
     next(error);
   }
 });
-
-
 
 export default router;

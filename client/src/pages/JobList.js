@@ -59,13 +59,19 @@ export const JobList = () => {
   };
   return (
     <Layout>
-      <div className="tablecontainer">
-        <h1 className="text-center p-4">Job List</h1>
+      <div className="jobAddField">
+        <p className=""></p>
+        <h1 className="text-center">Job List</h1>
+        <Link to="/addjob" className="nav-link">
+          <Button>Add Job</Button>
+        </Link>
+      </div>
 
-        <div className=" d-flex gap-2">
-          <div className="wantToapply">
+      <div className="tablecontainer">
+        <div className="alltables d-flex gap-2 ">
+          <div className="wantToapply card1 rounded p-3">
             <h3 className="text-center">Want to apply </h3>
-            <Table striped bordered hover>
+            <Table striped bordered hover className="table1">
               <thead>
                 <tr>
                   <th>S.N</th>
@@ -79,7 +85,7 @@ export const JobList = () => {
                   <tr>
                     <td>{i + 1}</td>
                     <Link to={`/singleJob/${item._id}`} className="nav-link">
-                      <td>{item.title}</td>
+                      <td style={{ wordWrap: "break-word" }}>{item.title}</td>
                     </Link>
 
                     <td>
@@ -96,39 +102,8 @@ export const JobList = () => {
               </tbody>
             </Table>
           </div>
-          <div className="applied ">
-            {" "}
-            <h3 className="text-center">Applied Jobs</h3>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>S.N</th>
-                  <th>Job Title</th>
 
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {approvedList.map((item, i) => (
-                  <tr>
-                    <td>{i + 1}</td>
-                    <Link to={`/singleJob/${item._id}`} className="nav-link">
-                      <td>{item.title}</td>
-                    </Link>
-
-                    <td>
-                      <Form.Select onChange={handleChange}>
-                        <option value="option1">{item.status}</option>
-                        <option value={item._id + "|pending"}>Pending</option>
-                        <option value={item._id + "|rejected"}>Rejected</option>
-                      </Form.Select>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </div>
-          <div className="processing">
+          <div className="processing card2 rounded p-3">
             {" "}
             <h3 className="text-center">Pending jobs</h3>
             <Table striped bordered hover>
@@ -151,7 +126,7 @@ export const JobList = () => {
                     <td>
                       <Form.Select onChange={handleChange}>
                         <option value="option1">{item.status}</option>
-                        <option value={item._id + "|rejected"}>Applied</option>
+                        <option value={item._id + "|applied"}>Applied</option>
                         {/* <option value="rejected">rejected</option> */}
                       </Form.Select>
                     </td>
@@ -160,7 +135,39 @@ export const JobList = () => {
               </tbody>
             </Table>
           </div>
-          <div className="rejected">
+          <div className="applied card3 rounded p-3">
+            {" "}
+            <h3 className="text-center">Applied Jobs</h3>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>S.N</th>
+                  <th>Job Title</th>
+
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {approvedList.map((item, i) => (
+                  <tr>
+                    <td>{i + 1}</td>
+                    <Link to={`/singleJob/${item._id}`} className="nav-link">
+                      <td>{item.title}</td>
+                    </Link>
+
+                    <td>
+                      <Form.Select onChange={handleChange}>
+                        <option value="option1">{item.status}</option>
+                        {/* <option value={item._id + "|pending"}>Pending</option> */}
+                        <option value={item._id + "|rejected"}>Rejected</option>
+                      </Form.Select>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+          <div className="rejected card4 rounded p-3">
             {" "}
             <h3 className="text-center">Rejected Jobs</h3>
             <Table striped bordered hover>

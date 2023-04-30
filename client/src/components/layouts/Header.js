@@ -10,6 +10,10 @@ const Header = () => {
   // console.log();
   // setUserID(useInfo);
 
+  const handleOnLogout = (e) => {
+    JSON.parse(sessionStorage.removeItem("loginId"));
+  };
+
   return (
     <Navbar bg="warning" expand="md">
       <Container>
@@ -23,20 +27,23 @@ const Header = () => {
           <Nav className="ms-auto ">
             {useInfo?._id ? (
               <>
-                <Link to="/dashboard" className="nav-link">
-                  <i className="fa-solid fa-right-to-bracket">Profile</i>
+                <Link to="/joblist" className="nav-link">
+                  <i class="fa-sharp fa-solid fa-list"></i> Joblist
                 </Link>
-                <Link to="/logout" className="nav-link">
-                  <i className="fa-solid fa-right-to-bracket">Logout</i>
+                <Link to="/mockProfile" className="nav-link">
+                  <i class="fa-solid fa-user"></i> Profile
+                </Link>
+                <Link to="/" className="nav-link" onClick={handleOnLogout}>
+                  <i class="fa-solid fa-right-from-bracket"></i> Logout
                 </Link>
               </>
             ) : (
               <>
                 <Link to="/" className="nav-link">
-                  <i className="fa-solid fa-user">Login</i>
+                  <i className="fa-solid fa-user"></i> Login
                 </Link>
                 <Link to="/register" className="nav-link">
-                  <i className="fa-solid fa-right-to-bracket">Register</i>
+                  <i className="fa-solid fa-right-to-bracket"></i> Register
                 </Link>
               </>
             )}

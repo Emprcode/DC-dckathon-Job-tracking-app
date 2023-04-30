@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../components/layouts/Layout";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -6,73 +6,89 @@ import Row from "react-bootstrap/Row";
 import { Form } from "react-bootstrap";
 import CustomInput from "../../components/customInput/CustomInput";
 import { Button } from "react-bootstrap";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { addProfile } from "../../utils/AxiosHelper";
 
 const Profile = () => {
+  const userId = JSON.parse(sessionStorage.getItem("loginId"))._id;
+  console.log(userId);
+  const [form, setForm] = useState({});
   const inputField = [
+    // {
+    //   name: "fName",
+    //   type: "text",
+    //   label: "First Name",
+    //   required: true,
+    //   placeholder: "John",
+    // },
+    // {
+    //   name: "lName",
+    //   type: "text",
+    //   label: "Last Name",
+    //   required: true,
+    //   placeholder: "Doe",
+    // },
     {
       name: "skills",
       type: "text",
       label: "Skills",
       required: true,
-      placeholder: "JavaScript",
+      placeholder: "React",
     },
     {
-      name: "lName",
+      name: "experience",
       type: "text",
-      label: "Last Name",
+      label: "Experience",
       required: true,
-      placeholder: "Doe",
+      placeholder: "JavaScript, React",
     },
     {
-      name: "email",
-      type: "email",
-      label: "Email",
+      name: "education",
+      type: "text",
+      label: "Education",
       required: true,
-      placeholder: "doe@gmail.com",
+      placeholder: "Bachelor's of Computer Science",
     },
     {
-      name: "password",
-      type: "password",
-      label: "Password",
+      name: "resume",
+      type: "file",
+      label: "Resume",
       required: true,
-      placeholder: "****",
-    },
-    {
-      name: "confirmPassword",
-      type: "password",
-      label: "Confirm Password",
-      required: true,
-      placeholder: "****",
+      placeholder: "Resume",
     },
   ];
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
+  // console.log(form);
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log(form);
+    const { status, message, result } = await addProfile(form);
+    console.log(message);
+    toast[status](message);
+    // sessionStorage.setItem("loginId", JSON.stringify(result));
+    console.log(form);
+    // status === "success" && navigation("/dashboard");
+  };
   return (
     <Layout>
       <Container className="mt-5 ">
-        <Row className="profileTop">
-          <Col className="img" xs={6} md={4}>
-            <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
-              alt=""
-              rounded
-            />
-          </Col>
-          <Col xs={6} md={4} className="ms-auto">
-            <ul>
-              <li>Name:</li>
-              <li>Email:</li>
-              <li>Bio:</li>
-              <li>LinkedIn:</li>
-            </ul>
-          </Col>
-          {/* <Col xs={6} md={4}>
-            <Image src="holder.js/171x180" thumbnail />
-          </Col> */}
-        </Row>
-
         <div className="profileDesc">
-          <Form className="mt-4">
+          <Form className="mt-4" onSubmit={handleOnSubmit}>
             {inputField.map((item, i) => {
-              return <CustomInput key={i} {...item} />;
+              return (
+                <CustomInput key={i} {...item} onChange={handleOnChange} />
+              );
             })}
             <div className="d-grid">
               <Button variant="info" type="submit">

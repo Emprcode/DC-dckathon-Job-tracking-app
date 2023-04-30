@@ -8,6 +8,8 @@ import DashBoard from "./pages/DashBoard";
 import { AddJob } from "./pages/AddJob";
 import { JobList } from "./pages/JobList";
 import { SingleJob } from "./pages/SingleJob";
+import Profile from "./pages/profile/Profile";
+import { MockProfile } from "./pages/profile/MockProfile";
 
 function App() {
   return (
@@ -19,11 +21,13 @@ function App() {
           <Route path="/dashboard" element={<DashBoard />} />
           <Route path="/addjob" element={<AddJob />} />
           <Route path="/jobList" element={<JobList />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/mockProfile" element={<MockProfile />} />
           <Route path="/jobList/:status" element={<JobList />} />
           <Route path="/singleJob/:jobId" element={<SingleJob />} />
         </Routes>
       </BrowserRouter>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }

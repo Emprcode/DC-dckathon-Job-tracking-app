@@ -4,7 +4,18 @@ const rootUrl = "http://localhost:8000/api/v1";
 const userUrl = rootUrl + "/user";
 const loginUrl = rootUrl + "/user/login";
 const addJobUrl = rootUrl + "/job";
+const profileUrl = rootUrl + "/profile";
 
+// getUserId
+
+const getUseridfromStorage = () => {
+  const user = sessionStorage.getItem("loginId");
+  if (user) {
+    const userObj = JSON.parse(user);
+    return userObj?._id;
+  }
+  return;
+};
 export const createUser = async (formData) => {
   try {
     const { data } = await axios.post(userUrl, formData);
@@ -20,6 +31,41 @@ export const createUser = async (formData) => {
 export const loginUser = async (formData) => {
   try {
     const { data } = await axios.post(loginUrl, formData);
+    console.log(data);
+    return data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+export const addProfile = async (formData) => {
+  try {
+    const userId = getUseridfromStorage();
+
+    const { data } = await axios.post(profileUrl, formData, {
+      headers: {
+        Authorization: userId,
+      },
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+export const getProfile = async () => {
+  try {
+    const userId = getUseridfromStorage();
+    const { data } = await axios.get(profileUrl, {
+      headers: {
+        Authorization: userId,
+      },
+    });
     console.log(data);
     return data;
   } catch (error) {

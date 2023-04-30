@@ -41,7 +41,6 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-
 //get singleJob
 router.get("/:id", async (req, res, next) => {
   try {
@@ -57,8 +56,10 @@ router.get("/:id", async (req, res, next) => {
 });
 router.put("/", async (req, res, next) => {
   try {
-    const { _id, ...rest } = req.body;
-    const result = await findJobAndUpdate(_id, rest);
+    const { _id, status } = req.body;
+    // console.log(req.body);
+    const result = await findJobAndUpdate(_id, { status });
+    console.log(result);
 
     result?._id
       ? res.json({

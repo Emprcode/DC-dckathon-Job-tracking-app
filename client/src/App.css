@@ -12,7 +12,7 @@
 .register-form {
   width: 400px;
   height: max-content;
- /* height: max-content; */
+  /* height: max-content; */
   margin: auto;
   box-shadow: -1px 1px 1px 2px rgba(128, 128, 128, 0.158);
   border-radius: 4px;
@@ -24,23 +24,24 @@
   padding-top: 3rem;
 }
 
-.dashcolor{
+.dashcolor {
   background: #f2edf3;
   width: 100% !important;
 }
 
-
-.card1{
- background: linear-gradient(to right, #ffbf96, #fe7096);
- 
+.card1 {
+  background: linear-gradient(to right, #ffbf96, #fe7096);
 }
-.card2{
-  background: linear-gradient(to right, #90caf9, #047edf 99%) 
+.card2 {
+  background: linear-gradient(to right, #90caf9, #047edf 99%);
 }
-.card3{
-  background: linear-gradient(to right, #84d9d2, #07cdae)
+.card3 {
+  background: linear-gradient(to right, #84d9d2, #07cdae);
 }
 
-
-
-
+.tablecontainer > div {
+  width: 900px;
+}
+.tablecontainer {
+  margin: 10px 10px 20px 20px;
+}

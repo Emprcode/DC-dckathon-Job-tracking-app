@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/layouts/Layout";
 import Table from "react-bootstrap/Table";
-import { Form } from "react-bootstrap";
-import { getAllJob } from "../utils/AxiosHelper";
+import { Button, Form } from "react-bootstrap";
+import { deletedJob, getAllJob, updateJobStatus } from "../utils/AxiosHelper";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 export const JobList = () => {
-  const [selectedOption, setSelectedOption] = useState("");
-
+  const [singleUpdatedData, setSingleUpdatedData] = useState({});
   const [alljobList, setAllJobList] = useState([]);
 
   const location = useLocation();
   const statusFromDashboard = location.pathname.split("/")[2];
-  // location ? setSelectedOption(statusFromDashboard) : setSelectedOption("");
-  // location && setSelectedOption(statusFromDashboard);
+
   console.log(statusFromDashboard);
 
   useEffect(() => {
@@ -23,65 +21,176 @@ export const JobList = () => {
       setAllJobList(result);
     };
     callJobAxios();
-  }, []);
+  }, [singleUpdatedData]);
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
+  const handleChange = async (event) => {
+    const tobeupdated = event.target.value.split("|");
+    const [_id, status] = tobeupdated;
+
+    const obj = { _id, status };
+
+    const result = await updateJobStatus(obj);
+    setSingleUpdatedData(result);
+    console.log(result);
   };
 
-  console.log(selectedOption);
-  // filter for dropdown
-  const filteredJobList = alljobList.filter(
-    (item) => item.status === selectedOption
+  const approvedList = alljobList.filter((item) => item.status === "applied");
+  const pendingList = alljobList.filter((item) => item.status === "pending");
+  const rejectedList = alljobList.filter((item) => item.status === "rejected");
+
+  const wantToApplyList = alljobList.filter(
+    (item) => item.status === "wantToApply"
   );
 
-  // filter from dashboard
-  // const dashboardFilteredJobList = alljobList.filter(
-  //   (item) => item.status === statusFromDashboard
-  // );
+  // delete the job
 
-  // console.log(filteredJobList);
+  const handleDelteJob = async (id) => {
+    console.log(id);
+    const result = await deletedJob({ _id: id });
 
-  const jobList = selectedOption === "" ? alljobList : filteredJobList;
+    console.log(result);
+  };
   return (
     <Layout>
-      <div className="container">
+      <div className="tablecontainer">
         <h1 className="text-center p-4">Job List</h1>
-        <Form.Select
-          className="mb-4"
-          name="status"
-          // value={form.status}
-          onChange={handleChange}
-          label="Choose the Job Status"
-          required>
-          <option value="">All Jobs</option>
-          <option value="applied">Applied</option>
-          <option value="wantToApply">Want to Apply</option>
-          {/* <option value="3">Three</option> */}
-        </Form.Select>
 
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>S.N</th>
-              <th>Job Title</th>
-              <th>Company</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jobList.map((item, i) => (
-              <tr>
-                <td>{i + 1}</td>
-                <Link to={`/singleJob/${item._id}`} className="nav-link">
-                  <td>{item.title}</td>
-                </Link>
-                <td>{item.link}</td>
-                <td>{item.status}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+        <div className=" d-flex gap-2">
+          <div className="wantToapply">
+            <h3>Want to apply </h3>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>S.N</th>
+                  <th>Job Title</th>
+
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {wantToApplyList.map((item, i) => (
+                  <tr>
+                    <td>{i + 1}</td>
+                    <Link to={`/singleJob/${item._id}`} className="nav-link">
+                      <td>{item.title}</td>
+                    </Link>
+
+                    <td>
+                      <Form.Select onChange={handleChange}>
+                        <option value={item._id + "|wantToApply"}>
+                          Want to Apply
+                        </option>
+                        <option value={item._id + "|applied"}>Applied</option>
+                        <option value={item._id + "|pending"}>Pending</option>
+                      </Form.Select>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+          <div className="applied ">
+            {" "}
+            <h3>Applied Jobs</h3>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>S.N</th>
+                  <th>Job Title</th>
+
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {approvedList.map((item, i) => (
+                  <tr>
+                    <td>{i + 1}</td>
+                    <Link to={`/singleJob/${item._id}`} className="nav-link">
+                      <td>{item.title}</td>
+                    </Link>
+
+                    <td>
+                      <Form.Select onChange={handleChange}>
+                        <option value="option1">{item.status}</option>
+                        <option value={item._id + "|pending"}>Pending</option>
+                        <option value={item._id + "|rejected"}>Rejected</option>
+                      </Form.Select>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+          <div className="processing">
+            {" "}
+            <h3>Pending jobs</h3>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>S.N</th>
+                  <th>Job Title</th>
+
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pendingList.map((item, i) => (
+                  <tr>
+                    <td>{i + 1}</td>
+                    <Link to={`/singleJob/${item._id}`} className="nav-link">
+                      <td>{item.title}</td>
+                    </Link>
+
+                    <td>
+                      <Form.Select onChange={handleChange}>
+                        <option value="option1">{item.status}</option>
+                        <option value={item._id + "|rejected"}>Applied</option>
+                        {/* <option value="rejected">rejected</option> */}
+                      </Form.Select>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+          <div className="rejected">
+            {" "}
+            <h3>Rejected Jobs</h3>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>S.N</th>
+                  <th>Job Title</th>
+
+                  <th>Delete Job</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rejectedList.map((item, i) => (
+                  <tr>
+                    <td>{i + 1}</td>
+                    <Link to={`/singleJob/${item._id}`} className="nav-link">
+                      <td>{item.title}</td>
+                    </Link>
+
+                    <td>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDelteJob(item._id)}
+                      >
+                        Delete
+                      </Button>
+                      {/* <Form.Select onChange={handleChange}>
+                        <option value="option1">{item.status}</option>
+                       
+                      </Form.Select> */}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </div>
       </div>
     </Layout>
   );

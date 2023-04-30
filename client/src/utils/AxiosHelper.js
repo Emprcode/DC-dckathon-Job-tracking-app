@@ -4,9 +4,6 @@ const rootUrl = "http://localhost:8000/api/v1";
 const userUrl = rootUrl + "/user";
 const loginUrl = rootUrl + "/user/login";
 const addJobUrl = rootUrl + "/job";
-const profileUrl = rootUrl + "/profile";
-
-// getUserId
 
 const getUseridfromStorage = () => {
   const user = sessionStorage.getItem("loginId");
@@ -118,6 +115,35 @@ export const deletedJob = async (obj) => {
     console.log(obj);
     const { data } = await axios.delete(addJobUrl, { data: obj });
 
+    console.log(data);
+    return data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
+export const addComments = async (obj) => {
+  try {
+    console.log(obj);
+    const { data } = await axios.post(CommentsUrl, obj);
+
+    console.log(data);
+    return data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+export const getComments = async (idJob) => {
+  try {
+    const { data } = await axios.get(CommentsUrl, {
+      headers: { Authorization: idJob },
+    });
     console.log(data);
     return data;
   } catch (error) {

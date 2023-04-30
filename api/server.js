@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
@@ -7,6 +8,17 @@ import UserRouter from "./src/routers/UserRouter.js";
 import JobRouter from "./src/routers/JobRouter.js";
 import ProfileRouter from "./src/routers/ProfileRouter.js";
 dotenv.config();
+=======
+import express from 'express'
+import morgan from 'morgan'
+import cors from 'cors'
+import dotenv from 'dotenv'
+import { connectDb } from './src/dbConfig/connectDb.js'
+import UserRouter from './src/routers/UserRouter.js'
+import JobRouter from './src/routers/JobRouter.js'
+import CommentRouter from './src/routers/CommentRouter.js'
+dotenv.config()
+>>>>>>> 4cd624a1779e6b3583cf2fa6b961f5653ed57e89
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -22,9 +34,15 @@ connectDb();
 
 //routers
 
+<<<<<<< HEAD
 app.use("/api/v1/user", UserRouter);
 app.use("/api/v1/job", JobRouter);
 app.use("/api/v1/profile", ProfileRouter);
+=======
+app.use("/api/v1/user", UserRouter)
+app.use("/api/v1/job", JobRouter)
+app.use("/api/v1/comment", CommentRouter)
+>>>>>>> 4cd624a1779e6b3583cf2fa6b961f5653ed57e89
 
 //global error handler
 

@@ -6,13 +6,21 @@ const JobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    company: {
+      type: String,
+      required: true,
+    },
+    comment: {
+      type: String,
+      // required: true,
+    },
     link: {
       type: String,
-      //   required: true,
+        required: true,
     },
     appliedDate: {
       type: Date,
-      required: true,
+      // required: true,
     },
     jd: {
       type: String,

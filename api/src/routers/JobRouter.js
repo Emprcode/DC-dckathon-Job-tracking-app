@@ -77,8 +77,9 @@ router.put("/", async (req, res, next) => {
 
 router.delete("/", async (req, res, next) => {
   try {
-    const { _id } = req.body;
-    const result = await deleteJob(_id);
+    const result = await deleteJob(req.body);
+    console.log(req.body);
+    console.log(result);
     result?._id
       ? res.json({
           status: "success",

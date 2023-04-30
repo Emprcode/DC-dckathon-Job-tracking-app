@@ -67,9 +67,11 @@ export const updateJobStatus = async (obj) => {
     };
   }
 };
-export const deletedJob = async (id) => {
+export const deletedJob = async (obj) => {
   try {
-    const { data } = await axios.delete(addJobUrl, id);
+    console.log(obj);
+    const { data } = await axios.delete(addJobUrl, { data: obj });
+
     console.log(data);
     return data;
   } catch (error) {

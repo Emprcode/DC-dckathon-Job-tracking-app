@@ -35,13 +35,13 @@ const Login = () => {
     });
   };
 
-
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const { status, message } = await loginUser(form);
-    toast[status](message)
+    const { status, message, result } = await loginUser(form);
+    toast[status](message);
+    sessionStorage.setItem("loginId", JSON.stringify(result));
     console.log(form);
-   status === "success" && navigation("/dashboard");
+    status === "success" && navigation("/dashboard");
   };
 
   return (
@@ -55,7 +55,9 @@ const Login = () => {
 
             <Form className="mt-4  " onSubmit={handleOnSubmit}>
               {inputField.map((item, i) => {
-                return <CustomInput key={i} {...item} onChange={handleOnChange}/>;
+                return (
+                  <CustomInput key={i} {...item} onChange={handleOnChange} />
+                );
               })}
               <div className="d-grid mt-5">
                 <Button variant="info" type="submit">

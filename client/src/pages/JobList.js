@@ -5,6 +5,7 @@ import { Button, Form } from "react-bootstrap";
 import { deletedJob, getAllJob, updateJobStatus } from "../utils/AxiosHelper";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
+import { toast } from "react-toastify";
 export const JobList = () => {
   const [singleUpdatedData, setSingleUpdatedData] = useState({});
   const [alljobList, setAllJobList] = useState([]);
@@ -13,13 +14,13 @@ export const JobList = () => {
   const statusFromDashboard = location.pathname.split("/")[2];
 
   console.log(statusFromDashboard);
+  const callJobAxios = async () => {
+    const { result } = await getAllJob();
+    console.log(result);
+    setAllJobList(result);
+  };
 
   useEffect(() => {
-    const callJobAxios = async () => {
-      const { result } = await getAllJob();
-      console.log(result);
-      setAllJobList(result);
-    };
     callJobAxios();
   }, [singleUpdatedData]);
 
@@ -45,10 +46,16 @@ export const JobList = () => {
   // delete the job
 
   const handleDelteJob = async (id) => {
-    console.log(id);
-    const result = await deletedJob({ _id: id });
+    // console.log({ _id });
 
-    console.log(result);
+    if (window.confirm("Are you sure you want to delete the job?")) {
+      const { status, message } = await deletedJob({ _id: id });
+      status && callJobAxios();
+
+      toast[status](message);
+    }
+
+    // console.log(result);
   };
   return (
     <Layout>
@@ -57,7 +64,7 @@ export const JobList = () => {
 
         <div className=" d-flex gap-2">
           <div className="wantToapply">
-            <h3>Want to apply </h3>
+            <h3 className="text-center">Want to apply </h3>
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -91,7 +98,7 @@ export const JobList = () => {
           </div>
           <div className="applied ">
             {" "}
-            <h3>Applied Jobs</h3>
+            <h3 className="text-center">Applied Jobs</h3>
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -123,7 +130,7 @@ export const JobList = () => {
           </div>
           <div className="processing">
             {" "}
-            <h3>Pending jobs</h3>
+            <h3 className="text-center">Pending jobs</h3>
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -155,7 +162,7 @@ export const JobList = () => {
           </div>
           <div className="rejected">
             {" "}
-            <h3>Rejected Jobs</h3>
+            <h3 className="text-center">Rejected Jobs</h3>
             <Table striped bordered hover>
               <thead>
                 <tr>

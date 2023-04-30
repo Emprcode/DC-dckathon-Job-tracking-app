@@ -40,8 +40,20 @@
 }
 
 .tablecontainer > div {
-  width: 900px;
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  /* width: 1500px; */
+
+  /* overflow-x: scroll; */
+  height: 50vh;
+  box-shadow: -2px 2px 2px solid black;
 }
 .tablecontainer {
-  margin: 10px 10px 20px 20px;
+  /* background-color: royalblue; */
+  /* margin: 50px 50px 50px 50px; */
+  padding: 20px 40px;
+  border-radius: 5px;
+  width: 100vw;
+  overflow: hidden;
 }

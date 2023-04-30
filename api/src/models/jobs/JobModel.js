@@ -23,3 +23,4 @@ export const findJobAndUpdate = (_id, obj) => {
 export const deleteJob = ({ _id }) => {
   return JobSchema.findByIdAndDelete(_id);
 };
+

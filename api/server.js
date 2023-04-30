@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import { connectDb } from './src/dbConfig/connectDb.js'
 import UserRouter from './src/routers/UserRouter.js'
 import JobRouter from './src/routers/JobRouter.js'
+import CommentRouter from './src/routers/CommentRouter.js'
 dotenv.config()
 
 
@@ -25,6 +26,7 @@ connectDb()
 
 app.use("/api/v1/user", UserRouter)
 app.use("/api/v1/job", JobRouter)
+app.use("/api/v1/comment", CommentRouter)
 
 //global error handler
 

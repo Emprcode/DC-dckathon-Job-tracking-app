@@ -2,7 +2,19 @@ import mongoose from "mongoose";
 
 const ProfileSchema = new mongoose.Schema(
   {
-   skills: {
+    // fName: {
+    //   type: String,
+    //   required: true,
+    // },
+    // lName: {
+    //   type: String,
+    //   required: true,
+    // },
+
+    userId: {
+      type: mongoose.Types.ObjectId,
+    },
+    skills: {
       type: String,
       required: true,
     },
@@ -14,7 +26,9 @@ const ProfileSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-  
+    resume: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

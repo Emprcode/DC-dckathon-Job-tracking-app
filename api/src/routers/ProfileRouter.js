@@ -2,15 +2,16 @@ import express from "express";
 import {
   addProfile,
   findProfileAndUpdate,
-  getProfile,
-} from "../models/Profile/ProfileModel";
+  getSingleProfile,
+} from "../models/Profile/ProfileModel.js";
 const router = express.Router();
 
 //post
 router.post("/", async (req, res, next) => {
   try {
+    const { authorization } = req.headers;
     console.log(req.body);
-    const result = await addProfile(req.body);
+    const result = await addProfile({ ...req.body, userId: authorization });
     console.log(result);
 
     result?._id
@@ -28,11 +29,13 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-//get
+// get SIngle Profile
 router.get("/", async (req, res, next) => {
   try {
     console.log(req.body);
-    const result = await getProfile(req.body);
+    const { authorization } = req.headers;
+
+    const result = await getSingleProfile({ userId: authorization });
     console.log(result);
 
     res.json({

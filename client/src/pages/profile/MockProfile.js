@@ -41,11 +41,11 @@ export const MockProfile = () => {
 
           <Col xs={6} md={4} className=" profileDetails">
             <ul>
-              <li>Name: {userObj.fName} </li>
-              <li>Email: {userObj.email} </li>
-              <li>Experience: {profiledetails.experience}</li>
-              <li>Education: {profiledetails.education}</li>
-              <li>Skills: {profiledetails.skills}</li>
+              <li>Name: {userObj?.fName} </li>
+              <li>Email: {userObj?.email} </li>
+              <li>Experience: {profiledetails?.experience}</li>
+              <li>Education: {profiledetails?.education}</li>
+              <li>Skills: {profiledetails?.skills}</li>
             </ul>
 
             <div className="cardStack">

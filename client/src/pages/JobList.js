@@ -24,6 +24,7 @@ export const JobList = () => {
     callJobAxios();
   }, [singleUpdatedData]);
 
+  // change the  state of the job and also update the job status
   const handleChange = async (event) => {
     const tobeupdated = event.target.value.split("|");
     const [_id, status] = tobeupdated;

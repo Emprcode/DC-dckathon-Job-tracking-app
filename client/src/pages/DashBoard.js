@@ -51,7 +51,6 @@ const DashBoard = () => {
                 </div>
 
                 <h4 className="fw-bold"> {wantToApplyList.length}</h4>
-                <p className="p-3">Increased by 20%</p>
               </div>
             </Link>
           </Col>
@@ -66,7 +65,6 @@ const DashBoard = () => {
                 </div>
 
                 <h4 className="fw-bold">{approvedList.length}</h4>
-                <p className="p-3">Increased by 40%</p>
               </div>
             </Link>
           </Col>
@@ -83,7 +81,6 @@ const DashBoard = () => {
                 </div>
 
                 <h4 className="fw-bold">{pendingList.length}</h4>
-                <p className="p-3">Decreased by 10%</p>
               </div>
             </Link>
           </Col>
@@ -97,7 +94,6 @@ const DashBoard = () => {
                 </div>
 
                 <h4 className="fw-bold"> {rejectedList.length}</h4>
-                <p className="p-3">Increased by 20%</p>
               </div>
             </Link>
           </Col>

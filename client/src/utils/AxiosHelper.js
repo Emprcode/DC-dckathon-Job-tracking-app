@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const rootUrl =
-  process.env.NODE_ENV === "production"
-    ? "/api/v1"
-    : "http://localhost:8000/api/v1";
+const rootUrl = "http://localhost:8000/api/v1";
+// process.env.NODE_ENV === "production"
+//   ? "/api/v1"
+//   : "http://localhost:8000/api/v1";
 const userUrl = rootUrl + "/user";
 const loginUrl = rootUrl + "/user/login";
 const addJobUrl = rootUrl + "/job";
